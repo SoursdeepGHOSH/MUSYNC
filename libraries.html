@@ -217,7 +217,7 @@
                     <div class="player-content">
                         <!-- Video Container (hidden for audio) -->
                         <div class="video-container" id="mainVideoContainer" style="display: none;">
-                            <video id="mainVideoPlayer" controls></video>
+                            <video id="mainVideoPlayer" crossorigin="anonymous" controls></video>
                         </div>
 
                         <div class="track-artwork" id="mainTrackArtwork">
@@ -291,7 +291,7 @@
     </main>
 
     <!-- Hidden Audio Element -->
-    <audio id="audioPlayer" preload="auto"></audio>
+    <audio id="audioPlayer" crossorigin="anonymous" preload="auto"></audio>
 
     <script>
         // Audius Music Player JavaScript
@@ -533,6 +533,7 @@
         // Main Library Player Elements
         const mainAudioPlayer = document.createElement('audio');
         mainAudioPlayer.id = 'mainAudioPlayer';
+        mainAudioPlayer.crossOrigin = 'anonymous';
         mainAudioPlayer.preload = 'auto';
         document.body.appendChild(mainAudioPlayer);
 
