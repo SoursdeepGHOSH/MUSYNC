@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium - MUSYNC</title>
+    <meta name="description"
+        content="Upgrade to MUSYNC Premium for unlimited music, ad-free listening, and exclusive features.">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="premium.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-music"></i>
+                <span class="logo-text">MUSYNC</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="libraries.html">Libraries</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="premium.html" class="active">Premium</a></li>
+
+                <!-- Auth buttons (shown when NOT logged in) -->
+                <li class="auth-nav" id="authNav">
+                    <a href="login.html" class="nav-btn login-btn">Login</a>
+                </li>
+                <li class="auth-nav" id="authNav2">
+                    <a href="register.html" class="nav-btn register-btn">Register</a>
+                </li>
+
+                <!-- Profile dropdown (shown when logged in) -->
+                <li class="profile-nav" id="profileNav" style="display: none;">
+                    <div class="profile-dropdown">
+                        <button class="profile-btn" id="profileBtn">
+                            <div class="profile-avatar">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span class="profile-name" id="profileName">User</span>
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </button>
+                        <div class="profile-menu" id="profileMenu">
+                            <a href="profile.html" class="profile-menu-item">
+                                <i class="fa-solid fa-user-circle"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="premium.html" class="profile-menu-item active">
+                                <i class="fa-solid fa-crown"></i>
+                                <span>Premium</span>
+                            </a>
+                            <div class="profile-menu-divider"></div>
+                            <button class="profile-menu-item logout-item" id="logoutBtn">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <span>Logout</span>
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="premium-main">
+        <div class="premium-container">
+            <!-- Premium Hero -->
+            <div class="premium-hero">
+                <h1 class="premium-title">
+                    Go <span class="highlight">Premium</span>
+                </h1>
+
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="pricing-grid">
+                <!-- Monthly Plan -->
+                <div class="pricing-card" id="monthlyPlan">
+                    <div class="pricing-icon">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <h3 class="plan-name">Starter</h3>
+                    <p class="plan-duration">1 Month</p>
+                    <div class="plan-price">
+                        <span class="price-amount">
+                            <span class="price-currency">₹</span>59
+                        </span>
+                        <span class="price-period">per month</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Unlimited song uploads</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Ad-free experience</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>High quality audio</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                    <button class="subscribe-btn" onclick="handleSubscribe('monthly', 59)">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Quarterly Plan - Popular -->
+                <div class="pricing-card popular" id="quarterlyPlan">
+                    <span class="popular-badge">Most Popular</span>
+                    <div class="pricing-icon">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+                    <h3 class="plan-name">Pro</h3>
+                    <p class="plan-duration">3 Months</p>
+                    <div class="plan-price">
+                        <span class="price-amount">
+                            <span class="price-currency">₹</span>159
+                        </span>
+                        <span class="price-period">for 3 months (Save ₹18)</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Everything in Starter</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Offline playback</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Custom playlists</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Advanced equalizer</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Premium visualizers</span>
+                        </li>
+                    </ul>
+                    <button class="subscribe-btn" onclick="handleSubscribe('quarterly', 159)">
+                        Subscribe Now
+                    </button>
+                </div>
+
+                <!-- Yearly Plan -->
+                <div class="pricing-card" id="yearlyPlan">
+                    <div class="pricing-icon">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <h3 class="plan-name">Ultimate</h3>
+                    <p class="plan-duration">1 Year</p>
+                    <div class="plan-price">
+                        <span class="price-amount">
+                            <span class="price-currency">₹</span>1599
+                        </span>
+                        <span class="price-period">for 1 year (Save ₹109)</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Everything in Pro</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Unlimited cloud storage</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Early access to features</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Exclusive themes</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>Family sharing (up to 5)</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            <span>24/7 dedicated support</span>
+                        </li>
+                    </ul>
+                    <button class="subscribe-btn" onclick="handleSubscribe('yearly', 1599)">
+                        Best Value
+                    </button>
+                </div>
+            </div>
+
+            <!-- Features Highlight -->
+            <div class="features-highlight">
+                <div class="highlight-item">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Instant activation after payment</span>
+                </div>
+                <div class="highlight-item">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>100% secure payment</span>
+                </div>
+                <div class="highlight-item">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                    <span>Cancel anytime</span>
+                </div>
+                <div class="highlight-item">
+                    <i class="fa-solid fa-headset"></i>
+                    <span>24/7 customer support</span>
+                </div>
+            </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fa-solid fa-music"></i>
+                <span>MUSYNC</span>
+            </div>
+            <p>&copy; 2024 MUSYNC. Made with <i class="fa-solid fa-heart"></i></p>
+        </div>
+    </footer>
+
+    <!-- Auth & Profile Script -->
+    <script>
+        // Check if user is logged in
+        const userData = localStorage.getItem('user');
+        if (!userData) {
+            window.location.href = 'welcome.html';
+        } else {
+            const user = JSON.parse(userData);
+            document.querySelectorAll('.auth-nav').forEach(el => el.style.display = 'none');
+            const profileNav = document.getElementById('profileNav');
+            if (profileNav) profileNav.style.display = 'block';
+            const profileName = document.getElementById('profileName');
+            if (profileName) profileName.textContent = user.firstName || user.username || 'User';
+        }
+
+        // Profile dropdown toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const profileMenu = document.getElementById('profileMenu');
+        if (profileBtn && profileMenu) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                profileMenu.classList.toggle('active');
+                profileBtn.classList.toggle('active');
+            });
+            document.addEventListener('click', () => {
+                profileMenu.classList.remove('active');
+                profileBtn.classList.remove('active');
+            });
+        }
+
+        // Logout
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('user');
+                window.location.href = 'welcome.html';
+            });
+        }
+
+        // Handle subscription
+        function handleSubscribe(plan, amount) {
+            // Show confirmation alert
+            const planNames = {
+                'monthly': 'Starter (1 Month)',
+                'quarterly': 'Pro (3 Months)',
+                'yearly': 'Ultimate (1 Year)'
+            };
+
+            const confirmed = confirm(
+                `Subscribe to ${planNames[plan]} for ₹${amount}?\n\n` +
+                `This will take you to the payment page.`
+            );
+
+            if (confirmed) {
+                // In a real app, this would redirect to a payment gateway
+                alert(
+                    '🎉 Thank you for your interest!\n\n' +
+                    'Payment integration coming soon.\n' +
+                    'For now, enjoy MUSYNC for free!'
+                );
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - MUSYNC</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="about.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-music"></i>
+                <span class="logo-text">MUSYNC</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="libraries.html">Libraries</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="premium.html">Premium</a></li>
+
+                <!-- Auth buttons (shown when NOT logged in) -->
+                <li class="auth-nav" id="authNav">
+                    <a href="login.html" class="nav-btn login-btn">Login</a>
+                </li>
+                <li class="auth-nav" id="authNav2">
+                    <a href="register.html" class="nav-btn register-btn">Register</a>
+                </li>
+
+                <!-- Profile dropdown (shown when logged in) -->
+                <li class="profile-nav" id="profileNav" style="display: none;">
+                    <div class="profile-dropdown">
+                        <button class="profile-btn" id="profileBtn">
+                            <div class="profile-avatar">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span class="profile-name" id="profileName">User</span>
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </button>
+                        <div class="profile-menu" id="profileMenu">
+                            <a href="profile.html" class="profile-menu-item">
+                                <i class="fa-solid fa-user-circle"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="premium.html" class="profile-menu-item">
+                                <i class="fa-solid fa-crown"></i>
+                                <span>Premium</span>
+                            </a>
+                            <div class="profile-menu-divider"></div>
+                            <button class="profile-menu-item logout-item" id="logoutBtn">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <span>Logout</span>
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <!-- About Section -->
+        <section class="about page-section">
+            <div class="about-content">
+                <h1 class="page-title">
+                    <i class="fa-solid fa-heart"></i>
+                    Why MUSYNC?
+                </h1>
+                <p class="about-intro">
+                    MUSYNC is your premium music hub designed to deliver the best audio experience
+                    with a beautiful, modern interface.
+                </p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3>Beautiful Design</h3>
+                        <p>Premium glassmorphism UI with stunning animations that make listening to music a visual treat
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-chart-simple"></i>
+                        </div>
+                        <h3>Live Equalizer</h3>
+                        <p>9-bar animated equalizer that dances to your music, bringing your tracks to life</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3>Fast & Responsive</h3>
+                        <p>Smooth performance on all devices, from desktop to mobile</p>
+                    </div>
+                    <div class="about-cta">
+                        <a href="libraries.html" class="cta-button">
+                            <span>Start Listening</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fa-solid fa-music"></i>
+                <span>MUSYNC</span>
+            </div>
+            <p>&copy; 2024 MUSYNC. Made with <i class="fa-solid fa-heart"></i></p>
+        </div>
+    </footer>
+
+    <!-- Auth & Profile Script -->
+    <script>
+        // Check if user is logged in
+        const userData = localStorage.getItem('user');
+        if (!userData) {
+            window.location.href = 'welcome.html';
+        } else {
+            const user = JSON.parse(userData);
+            document.querySelectorAll('.auth-nav').forEach(el => el.style.display = 'none');
+            const profileNav = document.getElementById('profileNav');
+            if (profileNav) profileNav.style.display = 'block';
+            const profileName = document.getElementById('profileName');
+            if (profileName) profileName.textContent = user.firstName || user.username || 'User';
+        }
+
+        // Profile dropdown toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const profileMenu = document.getElementById('profileMenu');
+        if (profileBtn && profileMenu) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                profileMenu.classList.toggle('active');
+                profileBtn.classList.toggle('active');
+            });
+            document.addEventListener('click', () => {
+                profileMenu.classList.remove('active');
+                profileBtn.classList.remove('active');
+            });
+        }
+
+        // Logout
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('user');
+                window.location.href = 'welcome.html';
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - MUSYNC</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-music"></i>
+                <span class="logo-text">MUSYNC</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="libraries.html">Libraries</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="premium.html">Premium</a></li>
+
+                <!-- Profile dropdown -->
+                <li class="profile-nav" id="profileNav">
+                    <div class="profile-dropdown">
+                        <button class="profile-btn" id="profileBtn">
+                            <div class="profile-avatar">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span class="profile-name" id="profileName">User</span>
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </button>
+                        <div class="profile-menu" id="profileMenu">
+                            <a href="profile.html" class="profile-menu-item active">
+                                <i class="fa-solid fa-user-circle"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="premium.html" class="profile-menu-item">
+                                <i class="fa-solid fa-crown"></i>
+                                <span>Premium</span>
+                            </a>
+                            <div class="profile-menu-divider"></div>
+                            <button class="profile-menu-item logout-item" id="logoutBtn">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <span>Logout</span>
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="profile-main">
+        <div class="profile-container">
+            <!-- Profile Header -->
+            <div class="profile-hero">
+                <div class="profile-hero-avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="profile-hero-info">
+                    <h1 id="displayName">User Name</h1>
+                    <p class="username-display">@<span id="displayUsername">username</span></p>
+                </div>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="profile-card-header">
+                    <i class="fa-solid fa-user-circle"></i>
+                    <h2>Profile Information</h2>
+                </div>
+
+                <div class="profile-details">
+                    <div class="profile-field">
+                        <div class="field-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="field-content">
+                            <span class="field-label">First Name</span>
+                            <span class="field-value" id="userFirstName">-</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-field">
+                        <div class="field-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="field-content">
+                            <span class="field-label">Last Name</span>
+                            <span class="field-value" id="userLastName">-</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-field">
+                        <div class="field-icon">
+                            <i class="fa-solid fa-at"></i>
+                        </div>
+                        <div class="field-content">
+                            <span class="field-label">Username</span>
+                            <span class="field-value" id="userUsername">-</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-field">
+                        <div class="field-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="field-content">
+                            <span class="field-label">Email Address</span>
+                            <span class="field-value" id="userEmail">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="logout-btn" id="logoutBtnMain">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fa-solid fa-music"></i>
+                <span>MUSYNC</span>
+            </div>
+            <p>&copy; 2024 MUSYNC. Made with <i class="fa-solid fa-heart"></i></p>
+        </div>
+    </footer>
+
+    <script>
+        // Check if user is logged in
+        const userData = localStorage.getItem('user');
+        if (!userData) {
+            window.location.href = 'welcome.html';
+        }
+
+        // Parse user data
+        const user = JSON.parse(userData);
+
+        // Populate profile information
+        document.getElementById('displayName').textContent = `${user.firstName || ''} ${user.lastName || ''}`.trim() || user.username;
+        document.getElementById('displayUsername').textContent = user.username || 'user';
+        document.getElementById('profileName').textContent = user.firstName || user.username || 'User';
+
+        document.getElementById('userFirstName').textContent = user.firstName || '-';
+        document.getElementById('userLastName').textContent = user.lastName || '-';
+        document.getElementById('userUsername').textContent = user.username || '-';
+        document.getElementById('userEmail').textContent = user.email || '-';
+
+        // Profile dropdown toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const profileMenu = document.getElementById('profileMenu');
+
+        if (profileBtn && profileMenu) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                profileMenu.classList.toggle('active');
+                profileBtn.classList.toggle('active');
+            });
+
+            document.addEventListener('click', () => {
+                profileMenu.classList.remove('active');
+                profileBtn.classList.remove('active');
+            });
+        }
+
+        // Logout functionality
+        function logout() {
+            localStorage.removeItem('user');
+            window.location.href = 'welcome.html';
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', logout);
+        document.getElementById('logoutBtnMain').addEventListener('click', logout);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to MUSYNC</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="welcome.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+        </div>
+    </div>
+
+    <main class="welcome-main">
+        <div class="welcome-wrapper">
+            <!-- Left Side - Visual -->
+            <div class="welcome-visual-section">
+                <div class="vinyl-animation">
+                    <div class="vinyl-record welcome-vinyl">
+                        <div class="vinyl-inner">
+                            <div class="vinyl-label">
+                                <i class="fa-solid fa-music"></i>
+                            </div>
+                        </div>
+                        <div class="vinyl-grooves"></div>
+                    </div>
+                </div>
+                <div class="visual-text">
+                    <h2>Your Music, Your Way</h2>
+                    <p>Stream, upload, and enjoy your favorite music with stunning visuals and premium audio quality.
+                    </p>
+                </div>
+                <div class="welcome-features">
+                    <div class="feature">
+                        <i class="fa-solid fa-headphones"></i>
+                        <span>Premium Audio</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Upload Music</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fa-solid fa-signal"></i>
+                        <span>Live Streaming</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Content -->
+            <div class="welcome-content-section">
+                <div class="welcome-card">
+                    <div class="welcome-header">
+                        <div class="logo-icon">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+                        <h1 class="welcome-title">MUSYNC</h1>
+                        <p class="welcome-tagline">The Ultimate Music Experience</p>
+                    </div>
+
+                    <div class="welcome-text">
+                        <p>Join millions of music lovers and discover a new way to experience your favorite songs.</p>
+                    </div>
+
+                    <div class="welcome-buttons">
+                        <a href="login.html" class="welcome-btn login-btn">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            <span>Sign In</span>
+                        </a>
+                        <a href="register.html" class="welcome-btn register-btn">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Create Account</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="welcome-footer">
+            <p>&copy; 2024 MUSYNC. Made with <i class="fa-solid fa-heart"></i></p>
+        </div>
+    </main>
+
+    <script>
+        // Check if user is already logged in
+        const user = localStorage.getItem('user');
+        if (user) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>

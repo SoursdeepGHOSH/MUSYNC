@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUSYNC - Your Music Hub</title>
+    <link rel="stylesheet" href="home.css">
+    <script src="home.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-music"></i>
+                <span class="logo-text">MUSYNC</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="libraries.html">Libraries</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="premium.html">Premium</a></li>
+
+                <!-- Auth buttons (shown when NOT logged in) -->
+                <li class="auth-nav" id="authNav">
+                    <a href="login.html" class="nav-btn login-btn">Login</a>
+                </li>
+                <li class="auth-nav" id="authNav2">
+                    <a href="register.html" class="nav-btn register-btn">Register</a>
+                </li>
+
+                <!-- Profile dropdown (shown when logged in) -->
+                <li class="profile-nav" id="profileNav" style="display: none;">
+                    <div class="profile-dropdown">
+                        <button class="profile-btn" id="profileBtn">
+                            <div class="profile-avatar">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <span class="profile-name" id="profileName">User</span>
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </button>
+                        <div class="profile-menu" id="profileMenu">
+                            <a href="profile.html" class="profile-menu-item">
+                                <i class="fa-solid fa-user-circle"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a href="premium.html" class="profile-menu-item">
+                                <i class="fa-solid fa-crown"></i>
+                                <span>Premium</span>
+                            </a>
+                            <div class="profile-menu-divider"></div>
+                            <button class="profile-menu-item logout-item" id="logoutBtn">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <span>Logout</span>
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-headphones"></i>
+                    <span>Premium Music Experience</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">MUSYNC</span>
+                    <span class="subtitle">Your Music, Your Way</span>
+                </h1>
+                <p class="hero-description">
+                    Access all your music libraries in one beautiful place.
+                    Stream, enjoy, and feel the rhythm with our premium audio experience.
+                </p>
+                <a href="libraries.html" class="cta-button">
+                    <span>Explore Libraries</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="hero-visual">
+                <div class="vinyl-record">
+                    <div class="vinyl-inner">
+                        <div class="vinyl-label">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+                    </div>
+                    <div class="vinyl-grooves"></div>
+                </div>
+                <div class="sound-waves">
+                    <div class="wave wave-1"></div>
+                    <div class="wave wave-2"></div>
+                    <div class="wave wave-3"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fa-solid fa-music"></i>
+                <span>MUSYNC</span>
+            </div>
+            <p>&copy; 2024 MUSYNC. Made with <i class="fa-solid fa-heart"></i></p>
+        </div>
+    </footer>
+
+    <!-- Auth & Profile Script -->
+    <script>
+        // Check if user is logged in
+        const userData = localStorage.getItem('user');
+        if (!userData) {
+            window.location.href = 'welcome.html';
+        } else {
+            // User is logged in - show profile, hide auth buttons
+            const user = JSON.parse(userData);
+
+            // Hide login/register buttons
+            document.querySelectorAll('.auth-nav').forEach(el => el.style.display = 'none');
+
+            // Show profile dropdown
+            const profileNav = document.getElementById('profileNav');
+            if (profileNav) {
+                profileNav.style.display = 'block';
+            }
+
+            // Set profile name
+            const profileName = document.getElementById('profileName');
+            if (profileName) {
+                profileName.textContent = user.firstName || user.username || 'User';
+            }
+        }
+
+        // Profile dropdown toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const profileMenu = document.getElementById('profileMenu');
+
+        if (profileBtn && profileMenu) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                profileMenu.classList.toggle('active');
+                profileBtn.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', () => {
+                profileMenu.classList.remove('active');
+                profileBtn.classList.remove('active');
+            });
+        }
+
+        // Logout function
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                localStorage.removeItem('user');
+                window.location.href = 'welcome.html';
+            });
+        }
+    </script>
+
+</body>
+
+</html>
