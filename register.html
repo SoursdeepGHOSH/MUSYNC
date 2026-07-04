@@ -158,7 +158,9 @@
         </div>
     </main>
 
-    <script>
+    <script type="module">
+        import { registerUser } from './supabaseClient.js';
+
         // Toggle password visibility
         function setupPasswordToggle(toggleBtn, inputField) {
             toggleBtn.addEventListener('click', () => {
@@ -217,34 +219,18 @@
                 return;
             }
 
-            const formData = {
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                username: document.getElementById('username').value,
-                email: document.getElementById('email').value,
-                password: password
-            };
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
 
             try {
-                const response = await fetch('/api/auth/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    alert('Account created successfully! Please login.');
-                    window.location.href = 'login.html';
-                } else {
-                    alert(data.error || 'Registration failed. Please try again.');
-                }
+                await registerUser(firstName, lastName, username, email, password);
+                alert('Account created successfully! Please login.');
+                window.location.href = 'login.html';
             } catch (error) {
                 console.error('Registration error:', error);
-                alert('Connection error. Please try again.');
+                alert(error.message || 'Registration failed. Please try again.');
             }
         });
     </script>

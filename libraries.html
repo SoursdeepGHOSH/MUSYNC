@@ -324,7 +324,7 @@
         // Fetch trending tracks from our servlet or directly from Audius
         async function fetchTrendingTracks() {
             try {
-                let response; 
+                let response;
                 let data;
 
                 // Try servlet first with correct context path
@@ -518,7 +518,8 @@
     </script>
 
     <!-- Main Library Player JavaScript -->
-    <script>
+    <script type="module">
+        import { getUserLibrary, uploadMedia, deleteMedia } from './musicService.js';
         // Main Library Player
         const mainLibraryCard = document.getElementById('mainLibraryCard');
         const mainLibrarySection = document.getElementById('mainLibrarySection');
@@ -768,19 +769,16 @@
         // Fetch tracks from Main Library
         async function fetchMainLibraryTracks() {
             try {
-                const response = await fetch('/api/library');
-                const data = await response.json();
+                const data = await getUserLibrary();
 
-                if (data.success && data.data) {
-                    mainLibraryTracks = data.data;
-                    populateMainTrackList();
+                mainLibraryTracks = data || [];
+                populateMainTrackList();
 
-                    if (mainLibraryTracks.length > 0) {
-                        loadMainTrack(0);
-                    } else {
-                        mainTrackTitle.textContent = 'No tracks yet';
-                        mainTrackArtist.textContent = 'Upload some music to get started';
-                    }
+                if (mainLibraryTracks.length > 0) {
+                    loadMainTrack(0);
+                } else {
+                    mainTrackTitle.textContent = 'No tracks yet';
+                    mainTrackArtist.textContent = 'Upload some music to get started';
                 }
             } catch (error) {
                 console.error('Error fetching library:', error);
@@ -846,16 +844,8 @@
             if (!confirm('Are you sure you want to delete this track?')) return;
 
             try {
-                const response = await fetch(`/api/library?id=${id}`, {
-                    method: 'DELETE'
-                });
-                const data = await response.json();
-
-                if (data.success) {
-                    fetchMainLibraryTracks();
-                } else {
-                    alert('Failed to delete track: ' + (data.error || 'Unknown error'));
-                }
+                await deleteMedia(id);
+                fetchMainLibraryTracks();
             } catch (error) {
                 console.error('Error deleting track:', error);
                 alert('Error deleting track');
@@ -877,7 +867,7 @@
             mainTrackArtist.textContent = track.artist || 'Unknown Artist';
 
             // Stream URL
-            const streamUrl = `/api/library/stream?id=${track.id}`;
+            const streamUrl = track.file_path || track.filePath;
 
             // Check if video or audio
             if (track.fileType === 'video') {
@@ -1083,20 +1073,9 @@
                 formData.append('file', file);
 
                 try {
-                    const response = await fetch('/api/upload', {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    const result = await response.json();
-
-                    if (result.success) {
-                        completed++;
-                        uploadProgressBar.style.width = `${(completed / files.length) * 100}%`;
-                    } else {
-                        console.error('Upload failed:', result.error);
-                        alert(`Failed to upload ${file.name}: ${result.error}`);
-                    }
+                    await uploadMedia(file);
+                    completed++;
+                    uploadProgressBar.style.width = `${(completed / files.length) * 100}%`;
                 } catch (error) {
                     console.error('Upload error:', error);
                     alert(`Error uploading ${file.name}`);
